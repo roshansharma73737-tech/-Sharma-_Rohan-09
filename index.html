@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FanFare — Book Movies, Events, Bus, Train &amp; Flight Tickets</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-ticket">
+    <span class="preloader-ticket__notch preloader-ticket__notch--top"></span>
+    <span class="preloader-ticket__notch preloader-ticket__notch--bottom"></span>
+    <p class="preloader-ticket__text">FANFARE</p>
+  </div>
+  <p class="preloader-caption">Printing your tickets…</p>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="#home" class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 48 32" width="30" height="20">
+          <path d="M2 8a4 4 0 0 0 0 16h44a4 4 0 0 0 0-16 4 4 0 0 1 0-8H2a4 4 0 0 0 0 8Z" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <line x1="24" y1="4" x2="24" y2="28" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 4"/>
+        </svg>
+      </span>
+      <span class="brand__name">FanFare</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#categories" class="nav-links__item">Book</a>
+      <a href="#trending" class="nav-links__item">Trending</a>
+      <a href="#how" class="nav-links__item">How it works</a>
+      <a href="#offers" class="nav-links__item">Offers</a>
+      <a href="#faq" class="nav-links__item">FAQ</a>
+      <div class="nav-links__auth">
+        <button class="btn btn--ghost" id="openLogin" type="button">Log in</button>
+        <button class="btn btn--primary" id="openSignup" type="button">Sign up</button>
+      </div>
+    </nav>
+
+    <div class="navbar__actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light theme" title="Toggle theme">
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" width="19" height="19"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" width="19" height="19"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="currentColor"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner">
+
+      <div class="ticket ticket--hero">
+        <div class="ticket__main">
+          <p class="hero__kicker">Every seat, every screen, every ride</p>
+          <h1 class="hero__title">One ticket for<br>everything you<br>don't want to miss.</h1>
+          <p class="hero__subtitle">Movies tonight, a festival next weekend, or a bus home for the holidays — search once, compare seats and prices, and lock it in before it's gone.</p>
+
+          <div class="search-widget">
+            <div class="search-widget__tabs" id="searchTabs" role="tablist">
+              <button class="search-tab is-active" data-category="movies" role="tab" aria-selected="true" type="button">Movies</button>
+              <button class="search-tab" data-category="events" role="tab" aria-selected="false" type="button">Events</button>
+              <button class="search-tab" data-category="bus" role="tab" aria-selected="false" type="button">Bus</button>
+              <button class="search-tab" data-category="train" role="tab" aria-selected="false" type="button">Train</button>
+              <button class="search-tab" data-category="flight" role="tab" aria-selected="false" type="button">Flight</button>
+            </div>
+
+            <form class="search-form" id="searchForm">
+              <div class="search-form__field" data-field="from-city" data-shown-for="movies,events">
+                <label for="fCity">City</label>
+                <input type="text" id="fCity" placeholder="e.g. Ahmedabad" value="Ahmedabad">
+              </div>
+              <div class="search-form__field" data-field="from" data-shown-for="bus,train,flight">
+                <label for="fFrom">From</label>
+                <input type="text" id="fFrom" placeholder="Departure city">
+              </div>
+              <div class="search-form__field" data-field="to" data-shown-for="bus,train,flight">
+                <label for="fTo">To</label>
+                <input type="text" id="fTo" placeholder="Destination city">
+              </div>
+              <div class="search-form__field" data-field="date" data-shown-for="movies,events,bus,train,flight">
+                <label for="fDate">Date</label>
+                <input type="date" id="fDate">
+              </div>
+              <button class="btn btn--primary search-form__submit" type="submit">
+                <span>Search</span>
+                <svg viewBox="0 0 20 20" width="16" height="16"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><line x1="13" y1="13" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="ticket__perforation" aria-hidden="true">
+          <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+          <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+        </div>
+
+        <div class="ticket__stub">
+          <p class="stub__label">Live right now</p>
+          <div class="stat" data-count="10000000" data-suffix="+">
+            <span class="stat__num">0</span>
+            <span class="stat__label">tickets booked</span>
+          </div>
+          <div class="stat" data-count="480" data-suffix="+">
+            <span class="stat__num">0</span>
+            <span class="stat__label">cities covered</span>
+          </div>
+          <div class="stat" data-count="126" data-suffix="">
+            <span class="stat__num">0</span>
+            <span class="stat__label">shows tonight</span>
+          </div>
+          <p class="stub__admit">ADMIT ONE · SEAT ANY · GATE ALL</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="categories" id="categories">
+    <div class="section-inner">
+      <h2 class="section-title">Book anything, anywhere</h2>
+      <p class="section-lede">Five ways to get where the action is — pick one and we'll filter what's trending below.</p>
+
+      <div class="category-grid" id="categoryGrid">
+        <button class="category-card" data-category="movies" type="button">
+          <span class="category-card__notch"></span>
+          <span class="category-card__icon">
+            <svg viewBox="0 0 40 40" width="26" height="26"><rect x="6" y="9" width="28" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M6 15h28M13 9v6M27 9v6" stroke="currentColor" stroke-width="2.2"/></svg>
+          </span>
+          <span class="category-card__title">Movies</span>
+          <span class="category-card__desc">Latest releases, every screen format.</span>
+        </button>
+
+        <button class="category-card" data-category="events" type="button">
+          <span class="category-card__notch"></span>
+          <span class="category-card__icon">
+            <svg viewBox="0 0 40 40" width="26" height="26"><path d="M20 6c-6 5-10 10-10 16a10 10 0 0 0 20 0c0-6-4-11-10-16Z" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+          </span>
+          <span class="category-card__title">Events</span>
+          <span class="category-card__desc">Concerts, comedy, festivals nearby.</span>
+        </button>
+
+        <button class="category-card" data-category="bus" type="button">
+          <span class="category-card__notch"></span>
+          <span class="category-card__icon">
+            <svg viewBox="0 0 40 40" width="26" height="26"><rect x="5" y="10" width="30" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="13" cy="30" r="2.4" fill="currentColor"/><circle cx="27" cy="30" r="2.4" fill="currentColor"/></svg>
+          </span>
+          <span class="category-card__title">Bus</span>
+          <span class="category-card__desc">Overnight sleepers and daytime hops.</span>
+        </button>
+
+        <button class="category-card" data-category="train" type="button">
+          <span class="category-card__notch"></span>
+          <span class="category-card__icon">
+            <svg viewBox="0 0 40 40" width="26" height="26"><rect x="10" y="6" width="20" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="15" cy="27" r="1.8" fill="currentColor"/><circle cx="25" cy="27" r="1.8" fill="currentColor"/></svg>
+          </span>
+          <span class="category-card__title">Train</span>
+          <span class="category-card__desc">Reserved berths, real-time platforms.</span>
+        </button>
+
+        <button class="category-card" data-category="flight" type="button">
+          <span class="category-card__notch"></span>
+          <span class="category-card__icon">
+            <svg viewBox="0 0 40 40" width="26" height="26"><path d="M20 4v32M6 15l14 6 14-6M11 30l9-4 9 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="category-card__title">Flight</span>
+          <span class="category-card__desc">Domestic hops and long-haul fares.</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRENDING ============ -->
+  <section class="trending" id="trending">
+    <div class="section-inner">
+      <div class="trending__head">
+        <div>
+          <h2 class="section-title">Trending this week</h2>
+          <p class="section-lede" id="trendingLede">Filtered by: everything</p>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevCard" type="button" aria-label="Previous">‹</button>
+          <button class="carousel-btn" id="nextCard" type="button" aria-label="Next">›</button>
+        </div>
+      </div>
+
+      <div class="trending-track" id="trendingTrack">
+
+        <article class="ticket-card" data-category="movies" data-title="Nightfall Protocol" data-price="299" data-meta="Sci-Fi · IMAX 2D · 2h 18m">
+          <div class="ticket-card__poster ticket-card__poster--1">
+            <span class="ticket-card__badge">IMAX</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Nightfall Protocol</h3>
+            <p class="ticket-card__meta">Sci-Fi · IMAX 2D · 2h 18m</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹299</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="events" data-title="Monsoon Sound Festival" data-price="899" data-meta="Music Festival · Riverside Grounds">
+          <div class="ticket-card__poster ticket-card__poster--2">
+            <span class="ticket-card__badge">Live</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Monsoon Sound Festival</h3>
+            <p class="ticket-card__meta">Music Festival · Riverside Grounds</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹899</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="movies" data-title="Paper Constellations" data-price="249" data-meta="Drama · 2D · 2h 04m">
+          <div class="ticket-card__poster ticket-card__poster--3">
+            <span class="ticket-card__badge">New</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Paper Constellations</h3>
+            <p class="ticket-card__meta">Drama · 2D · 2h 04m</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹249</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="bus" data-title="Ahmedabad → Udaipur Sleeper" data-price="649" data-meta="AC Sleeper · Departs 22:30 · 6h 10m">
+          <div class="ticket-card__poster ticket-card__poster--4">
+            <span class="ticket-card__badge">Overnight</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Ahmedabad → Udaipur</h3>
+            <p class="ticket-card__meta">AC Sleeper · Departs 22:30 · 6h 10m</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹649</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="train" data-title="Coastal Express" data-price="420" data-meta="AC Chair Car · Departs 07:05 · 4h 40m">
+          <div class="ticket-card__poster ticket-card__poster--5">
+            <span class="ticket-card__badge">Popular</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Coastal Express</h3>
+            <p class="ticket-card__meta">AC Chair Car · Departs 07:05 · 4h 40m</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹420</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="flight" data-title="Morning Hop to Goa" data-price="3199" data-meta="Non-stop · Departs 06:15 · 1h 25m">
+          <div class="ticket-card__poster ticket-card__poster--6">
+            <span class="ticket-card__badge">Non-stop</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Morning Hop to Goa</h3>
+            <p class="ticket-card__meta">Non-stop · Departs 06:15 · 1h 25m</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹3,199</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="events" data-title="Stand-up: Late Checkout" data-price="399" data-meta="Comedy · The Attic Club">
+          <div class="ticket-card__poster ticket-card__poster--7">
+            <span class="ticket-card__badge">Selling fast</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>Stand-up: Late Checkout</h3>
+            <p class="ticket-card__meta">Comedy · The Attic Club</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹399</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ticket-card" data-category="movies" data-title="The Long Harvest" data-price="279" data-meta="Thriller · 2D · 2h 11m">
+          <div class="ticket-card__poster ticket-card__poster--8">
+            <span class="ticket-card__badge">Critics' pick</span>
+          </div>
+          <div class="ticket-card__body">
+            <h3>The Long Harvest</h3>
+            <p class="ticket-card__meta">Thriller · 2D · 2h 11m</p>
+            <div class="ticket-card__foot">
+              <span class="ticket-card__price">₹279</span>
+              <button class="btn btn--small btn--primary" type="button" data-book>Book now</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how" id="how">
+    <div class="section-inner">
+      <h2 class="section-title">Three steps, one ticket</h2>
+      <div class="how-strip">
+        <div class="how-step">
+          <span class="how-step__num">1</span>
+          <h3>Search &amp; compare</h3>
+          <p>Pick a category, tell us where and when, and see every option on one screen.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-step__num">2</span>
+          <h3>Choose your seat</h3>
+          <p>Tap the exact seat, berth, or row you want on a live map before you commit.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-step__num">3</span>
+          <h3>Confirm &amp; go</h3>
+          <p>Pay once, get a ticket instantly, and show it at the gate — no printing needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OFFERS ============ -->
+  <section class="offers" id="offers">
+    <div class="section-inner">
+      <h2 class="section-title">Deals worth stacking</h2>
+      <div class="offer-grid">
+        <div class="offer-card">
+          <p class="offer-card__tag">First booking</p>
+          <p class="offer-card__desc">Take ₹150 off your first movie or event ticket.</p>
+          <div class="offer-card__code">
+            <span>FIRST150</span>
+            <button class="btn btn--tiny" type="button" data-copy="FIRST150">Copy</button>
+          </div>
+        </div>
+        <div class="offer-card">
+          <p class="offer-card__tag">Group travel</p>
+          <p class="offer-card__desc">15% back on bus or train bookings of 4+ seats.</p>
+          <div class="offer-card__code">
+            <span>GROUP15</span>
+            <button class="btn btn--tiny" type="button" data-copy="GROUP15">Copy</button>
+          </div>
+        </div>
+        <div class="offer-card">
+          <p class="offer-card__tag">Weekend flights</p>
+          <p class="offer-card__desc">Flat ₹500 off domestic flights booked on weekends.</p>
+          <div class="offer-card__code">
+            <span>SKY500</span>
+            <button class="btn btn--tiny" type="button" data-copy="SKY500">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-inner">
+      <h2 class="section-title">People who found their seat</h2>
+      <div class="testimonial-slider" id="testimonialSlider">
+        <div class="testimonial-track" id="testimonialTrack">
+          <blockquote class="testimonial">
+            <p>"Booked a last-minute sleeper bus at 11pm and had a confirmed berth before the next stop announcement."</p>
+            <footer>— Priya M., booked a Bus ticket</footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>"The seat map for the concert actually matched what I saw when I walked in. No surprises, no restricted view."</p>
+            <footer>— Arjun K., booked an Event ticket</footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>"Compared three flight times side by side and booked in under two minutes on my phone."</p>
+            <footer>— Sana R., booked a Flight ticket</footer>
+          </blockquote>
+        </div>
+        <div class="testimonial-dots" id="testimonialDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq" id="faq">
+    <div class="section-inner section-inner--narrow">
+      <h2 class="section-title">Questions, answered</h2>
+      <div class="accordion" id="accordion">
+        <div class="accordion-item">
+          <button class="accordion-item__q" type="button">
+            Can I choose my exact seat before paying?
+            <span class="accordion-item__icon">+</span>
+          </button>
+          <div class="accordion-item__a"><p>Yes — every movie, event, bus, train and most flight bookings show a live seat map, so you pick the exact spot before you pay anything.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-item__q" type="button">
+            What happens after I confirm a booking?
+            <span class="accordion-item__icon">+</span>
+          </button>
+          <div class="accordion-item__a"><p>You get a digital ticket instantly on screen. This demo shows the confirmation flow — connect it to email or SMS delivery in your own backend.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-item__q" type="button">
+            Can I cancel or change my seat later?
+            <span class="accordion-item__icon">+</span>
+          </button>
+          <div class="accordion-item__a"><p>Most categories allow free seat changes up to a few hours before departure or showtime, and cancellations follow the operator's own policy.</p></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-item__q" type="button">
+            Do group or family bookings get a discount?
+            <span class="accordion-item__icon">+</span>
+          </button>
+          <div class="accordion-item__a"><p>Yes — bookings of four or more seats on bus and train routes qualify for the GROUP15 code shown in the Offers section above.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="newsletter">
+    <div class="section-inner section-inner--narrow">
+      <div class="newsletter-card">
+        <div>
+          <h2 class="section-title">Never miss a price drop</h2>
+          <p class="section-lede">One email a week: new releases, fare drops on your saved routes, and seats about to sell out.</p>
+        </div>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="you@example.com" required>
+          <button class="btn btn--primary" type="submit">Get alerts</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="section-inner footer__inner">
+    <div class="footer__brand">
+      <a href="#home" class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 32" width="26" height="18"><path d="M2 8a4 4 0 0 0 0 16h44a4 4 0 0 0 0-16 4 4 0 0 1 0-8H2a4 4 0 0 0 0 8Z" fill="none" stroke="currentColor" stroke-width="2.5"/><line x1="24" y1="4" x2="24" y2="28" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 4"/></svg>
+        </span>
+        <span class="brand__name">FanFare</span>
+      </a>
+      <p>Every seat, every screen, every ride — one ticket.</p>
+    </div>
+
+    <div class="footer__col">
+      <h4>Book</h4>
+      <a href="#categories">Movies</a>
+      <a href="#categories">Events</a>
+      <a href="#categories">Bus</a>
+      <a href="#categories">Train</a>
+      <a href="#categories">Flights</a>
+    </div>
+    <div class="footer__col">
+      <h4>Company</h4>
+      <a href="#how">How it works</a>
+      <a href="#offers">Offers</a>
+      <a href="#faq">FAQ</a>
+      <a href="#testimonials">Reviews</a>
+    </div>
+    <div class="footer__col">
+      <h4>Support</h4>
+      <a href="#faq">Help centre</a>
+      <a href="#faq">Cancellations</a>
+      <a href="#faq">Contact us</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2026 FanFare. Demo front end — no real payments are processed.</p>
+  </div>
+</footer>
+
+<!-- ============ BACK TO TOP ============ -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
+
+<!-- ============ TOAST CONTAINER ============ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ============ MODAL: LOGIN ============ -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <button class="modal__close" type="button" data-close-modal>×</button>
+    <h3 id="loginTitle">Welcome back</h3>
+    <p class="modal__sub">Log in to see your saved seats and bookings.</p>
+    <form id="loginForm" novalidate>
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" placeholder="you@example.com" required>
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" required minlength="6">
+      <p class="form-error" id="loginError"></p>
+      <button class="btn btn--primary btn--block" type="submit">Log in</button>
+    </form>
+    <p class="modal__switch">New here? <button type="button" id="switchToSignup">Create an account</button></p>
+  </div>
+</div>
+
+<!-- ============ MODAL: SIGNUP ============ -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+    <button class="modal__close" type="button" data-close-modal>×</button>
+    <h3 id="signupTitle">Create your account</h3>
+    <p class="modal__sub">Takes less than a minute — no card required.</p>
+    <form id="signupForm" novalidate>
+      <label for="signupName">Full name</label>
+      <input type="text" id="signupName" placeholder="Your name" required>
+      <label for="signupEmail">Email</label>
+      <input type="email" id="signupEmail" placeholder="you@example.com" required>
+      <label for="signupPassword">Password</label>
+      <input type="password" id="signupPassword" placeholder="At least 6 characters" required minlength="6">
+      <p class="form-error" id="signupError"></p>
+      <button class="btn btn--primary btn--block" type="submit">Sign up</button>
+    </form>
+    <p class="modal__switch">Already have an account? <button type="button" id="switchToLogin">Log in</button></p>
+  </div>
+</div>
+
+<!-- ============ MODAL: BOOKING ============ -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal modal--wide" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <button class="modal__close" type="button" data-close-modal>×</button>
+    <h3 id="bookingTitle">Choose your seats</h3>
+    <p class="modal__sub" id="bookingMeta"></p>
+
+    <div class="seat-legend">
+      <span><i class="dot dot--available"></i> Available</span>
+      <span><i class="dot dot--selected"></i> Selected</span>
+      <span><i class="dot dot--taken"></i> Taken</span>
+    </div>
+
+    <div class="screen-label" id="screenLabel">screen this way</div>
+    <div class="seat-map" id="seatMap"></div>
+
+    <div class="booking-summary">
+      <p><span id="seatCount">0</span> seat(s) selected</p>
+      <p class="booking-summary__total">Total: ₹<span id="bookingTotal">0</span></p>
+    </div>
+    <button class="btn btn--primary btn--block" id="confirmBooking" type="button">Confirm booking</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
