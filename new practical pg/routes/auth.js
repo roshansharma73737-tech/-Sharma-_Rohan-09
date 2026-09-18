@@ -11,6 +11,8 @@ const autentication = require('../middleware/authentication');   //  import the 
 // create the router  for the  url routes -->
 
 const router = express.Router();
+const ACCESS_EXPIRY = process.env.ORIGINAL_TOKEN || '15m';
+const REFRESH_DAYS = parseInt(process.env.REFRESH_EXPIRE_DAYS || '7', 10);
 
 
 // create first routes  register  routes  of the users --->
@@ -79,7 +81,7 @@ router.post('/login' , async (req,res)=>{
         const acsses_token  = jwt.sign(
             {id:user.id, username:user.username },
             process.env.JWT_ACESSES_KEY,
-            {expireIn: ACCESSE_EXPIRE}
+            {expireIn: ACCESS_EXPIRY}
         );
 
         const expire_token =  crypto.randomBytes(40).tostring('hex');
@@ -150,7 +152,7 @@ router.post('/refresh' , async (req,res) =>{
         const accessToken = jwt.sign(
             {id: stored.user_id,username: stored.username},
             process.env.JWT_ACESSES_KEY,
-            {expiresIn: 'ACCESS_EXPIRE'}
+            {expiresIn: ACCESS_EXPIRY}
         );
         res.json({accessToken});
     } catch (err) {
@@ -175,3 +177,5 @@ router.post('/logout' , async (req,res) =>{
         res.status(500).json({error: 'Server error ! '});
     }
 }); 
+
+module.exports = router;
